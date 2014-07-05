@@ -2,10 +2,21 @@
 
 Current Tools:
 
-- Re-Indexing
+- Reindexing
 - Drop (Full-Delete of Indexes, Types, etc...)
 
-## Re-Indexing
+## Reindexing
+
+What is reindexing?
+
+From the ElasticSearch docs ...
+
+> While you can add new types to an index, or add new fields to a type, you can’t add new analyzers or make changes to
+existing fields. If you were to do so, the data that has already been indexed would be incorrect and your searches would
+no longer work as expected.
+
+> The simplest way to apply these changes to your existing data is just to reindex: create a new index with the new
+settings and copy all of your documents from the old index to the new index.
 
 ###Options
 
@@ -13,13 +24,21 @@ Here are the arguments the script takes:
 
 - `-h` or `--help` to get the possible options
 - `-d` or `--url` to set the ElasticSearch Url
-- `-o` or `--old-index` to set the indexing your re-indexing from
-- `-n` or `--new-index` to set the indexing your re-indexing to
+- `-o` or `--old-index` to set the indexing your reindexing from
+- `-n` or `--new-index` to set the indexing your reindexing to
 - `-a` or `--alias` to set the alias
 
 There are defaults for development purposes, but **please provide these values**.
 
 ## Drop
+
+What does drop mean in this context?
+
+It simply means ...
+
+- removing all indexes (and associated types)
+- clearing the cache against *_all*
+- refreshing *_all*
 
 ###Options
 
@@ -38,18 +57,19 @@ There are **two ways** to run these scripts.
     - The Uberjar for each profile will be named uberjar-standalone-<*profile-name*>, where profile-name
     would be something like **drop** or **reindex**, and located within the *target* folder, usually
     under a directory like <*profile-name*>+uberjar.
-        - `java -jar uberjar-standalone-reindex`
-        - `java -jar uberjar-standalone-drop`
+        - `$ java -jar uberjar-standalone-reindex`
+        - `$ java -jar uberjar-standalone-drop`
 
-- Via *lein* using an **alias** to a profile. All aliases can be found in `project.clj`. 
+- Via *lein* using an **alias** to a profile. All aliases can be found in `project.clj`.
     - `$ lein reindex -- -d "http://elasticsearch.com:9200" -o "old_index" -n "new_index" -a "elasticsearch_alias"`
-    - `leon drop -- -d "http://elasitcsearch.com:9200"`
+    - `$ lein drop -- -d "http://elasticsearch.com:9200"`
 
 ## Reference
+- [ElasticSearch - Reindexing Your Data](http://www.elasticsearch.org/guide/en/elasticsearch/guide/current/reindex.html)
 
-- [ElasticSearch Re-Indexing with Zero Downtime](http://www.elasticsearch.org/blog/changing-mapping-with-zero-downtime/)
+- [ElasticSearch - Reindexing with Zero Downtime](http://www.elasticsearch.org/blog/changing-mapping-with-zero-downtime/)
 
-- [ElasticSearch Delete Index](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-delete-index.html)
+- [ElasticSearch - Delete Index](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-delete-index.html)
 
 ## License
 
