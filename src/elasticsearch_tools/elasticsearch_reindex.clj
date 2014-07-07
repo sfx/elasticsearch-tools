@@ -20,24 +20,24 @@
 (def ^:private size
   1000)
 
-(defn old-index-scroll-url
+(defn- old-index-scroll-url
   []
   (format "%s/%s/_search?search_type=scan&scroll=%s"
           *url* *old-index* scroll-time))
 
-(defn scroll-url
+(defn- scroll-url
   []
   (memoize #(format "%s/_search/scroll?scroll=%s" *url* scroll-time)))
 
-(defn alias-url
+(defn- alias-url
   []
   (format "%s/_aliases" *url*))
 
-(defn bulk-url
+(defn- bulk-url
   []
   (memoize #(format "%s/_bulk" *url*)))
 
-(defn set-version
+(defn- set-version
   [action]
   (-> (assoc-in action [:index :_version] (c/now))
      (assoc-in [:index :_version_type] "external")))
@@ -71,7 +71,7 @@
              [] hits)
      (string/join)))
 
-(defn scan-search
+(defn- scan-search
   "Scan-search to get initial scroll-id."
   []
   (timbre/info "Get initial scroll-id")
@@ -81,7 +81,7 @@
       (c/log-resp "Scan-Search Response" response)
       response)))
 
-(defn scroll-search
+(defn- scroll-search
   "Scroll-search to batch through documents."
   [scroll-id]
   (let [req-params {:query-params {:scroll_id scroll-id}}]
@@ -89,7 +89,7 @@
       (c/log-resp "Scroll-Search Response" response)
       response)))
 
-(defn fetch-hits-and-bulk-update
+(defn- fetch-hits-and-bulk-update
   [scroll-id total-hits]
   (timbre/info "scroll-id:" scroll-id)
   (let [response (scroll-search scroll-id)
@@ -105,7 +105,7 @@
         (c/log-resp "Bulk Response" bulk-response))
       (recur scroll-id* total-hits))))
 
-(defn reindex
+(defn- reindex
   []
   (let [response (scan-search)
         resp-body (json/parse-string (:body response) true)
