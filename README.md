@@ -1,5 +1,7 @@
 # elasticsearch-tools
 
+[![Build Status](https://travis-ci.org/sfx/elasticsearch-tools.svg)](https://travis-ci.org/sfx/elasticsearch-tools)
+
 *Current Tools*:
 
 - Reindexing
