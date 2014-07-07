@@ -1,5 +1,6 @@
 (ns elasticsearch-tools.elasticsearch-reindex-test
   (:require [elasticsearch-tools.elasticsearch-reindex :as er]
+            [elasticsearch-tools.elasticsearch-drop :as ed]
             [elasticsearch-tools.test-elasticsearch-util :refer
              [init-es es-init-stub es-type]]
             [clojure.string :as string]
@@ -18,7 +19,8 @@
   (binding [er/*old-index* "test_v1"
             er/*new-index* "test_v2"]
     (er/reindex)
-    (Thread/sleep 1000)
+    (binding [ed/*url* er/*url*]
+      (ed/clean-up))
     (let [old-status (-> (http/get (format "%s/%s/%s/1"
                                           er/*url*
                                           er/*old-index*

@@ -38,11 +38,12 @@
 
 (defn init-es
   [f]
-  (binding [ed/*url* es-url]
-    (ed/es-drop))
   (binding [er/*url* es-url
             er/*new-index* first-index
             er/*alias* es-alias]
     (bulk_populate er/*url*)
-    (Thread/sleep 1000)
-    (f)))
+    (binding [ed/*url* es-url]
+      (ed/clean-up))
+    (f)
+    (binding [ed/*url* es-url]
+      (ed/es-drop))))

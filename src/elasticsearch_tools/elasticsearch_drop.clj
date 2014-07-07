@@ -20,7 +20,7 @@
   []
   (format "%s/_refresh" *url*))
 
-(defn- clean-up
+(defn clean-up
   []
   (let [cache-response (http/post (cache-clear-url))
         refresh-response (http/post (refresh-url))]
