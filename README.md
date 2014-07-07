@@ -1,6 +1,6 @@
 # elasticsearch-tools
 
-Current Tools:
+*Current Tools*:
 
 - Reindexing
 - Drop (Full-Delete of Indexes, Types, etc...)
