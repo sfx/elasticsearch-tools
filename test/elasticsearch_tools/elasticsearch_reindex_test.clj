@@ -17,10 +17,10 @@
 
 (deftest reindex-test
   (binding [er/*old-index* "test_v1"
-            er/*new-index* "test_v2"]
+            er/*new-index* "test_v2"
+            ed/*url* er/*url*]
     (er/reindex)
-    (binding [ed/*url* er/*url*]
-      (ed/clean-up))
+    (ed/clean-up)
     (let [old-status (-> (http/get (format "%s/%s/%s/1"
                                           er/*url*
                                           er/*old-index*

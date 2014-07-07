@@ -40,10 +40,9 @@
   [f]
   (binding [er/*url* es-url
             er/*new-index* first-index
-            er/*alias* es-alias]
+            er/*alias* es-alias
+            ed/*url* es-url]
     (bulk_populate er/*url*)
-    (binding [ed/*url* es-url]
-      (ed/clean-up))
+    (ed/clean-up)
     (f)
-    (binding [ed/*url* es-url]
-      (ed/es-drop))))
+    (ed/es-drop)))
