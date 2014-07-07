@@ -8,19 +8,19 @@
 
 (def ^:dynamic *url*)
 
-(defn all-url
+(defn- all-url
   []
   (format "%s/_all" *url*))
 
-(defn cache-clear-url
+(defn- cache-clear-url
   []
   (format "%s/_cache/clear" *url*))
 
-(defn refresh-url
+(defn- refresh-url
   []
   (format "%s/_refresh" *url*))
 
-(defn clean-up
+(defn- clean-up
   []
   (let [cache-response (http/post (cache-clear-url))
         refresh-response (http/post (refresh-url))]
