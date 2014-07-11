@@ -11,7 +11,7 @@
 
 What is reindexing?
 
-From the ElasticSearch docs ...
+From the Elasticsearch docs ...
 
 > While you can add new types to an index, or add new fields to a type, you can’t add new analyzers or make changes to
 existing fields. If you were to do so, the data that has already been indexed would be incorrect and your searches would
@@ -67,11 +67,11 @@ There are **two ways** to run these scripts.
     - `$ lein drop -- -d "http://elasticsearch.com:9200"`
 
 ## Reference
-- [ElasticSearch - Reindexing Your Data](http://www.elasticsearch.org/guide/en/elasticsearch/guide/current/reindex.html)
+- [Elasticsearch - Reindexing Your Data](http://www.elasticsearch.org/guide/en/elasticsearch/guide/current/reindex.html)
 
-- [ElasticSearch - Reindexing with Zero Downtime](http://www.elasticsearch.org/blog/changing-mapping-with-zero-downtime/)
+- [Elasticsearch - Reindexing with Zero Downtime](http://www.elasticsearch.org/blog/changing-mapping-with-zero-downtime/)
 
-- [ElasticSearch - Delete Index](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-delete-index.html)
+- [Elasticsearch - Delete Index](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-delete-index.html)
 
 ## License
 
